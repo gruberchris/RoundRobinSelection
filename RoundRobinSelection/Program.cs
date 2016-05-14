@@ -11,9 +11,11 @@ namespace RoundRobinSelection
         {
             DoArrayHelperSelectByRoundRobin();
 
-            DoCollectionByRoundRobinValueType();
+            DoCollectionByRoundRobin();
 
-            DoCollectionByRoundRobinReferenceType();
+            DoObjectCollectionSelectByRoundRobin();
+
+            DoObjectCollectionSelectByRoundRobinNoIndex();
         }
 
         static void DoArrayHelperSelectByRoundRobin()
@@ -35,7 +37,7 @@ namespace RoundRobinSelection
             } while (counter < colorNames.Length);
         }
 
-        static void DoCollectionByRoundRobinValueType()
+        static void DoCollectionByRoundRobin()
         {
             string[] applianceNames = { "television", "microwave", "washer", "dryer", "refridgerator" };
 
@@ -44,7 +46,7 @@ namespace RoundRobinSelection
 
             do
             {
-                var selectedElement = applianceNames.RoundRobin(x => x, lastSelectedIndex);
+                var selectedElement = applianceNames.SelectByRoundRobin(x => x, lastSelectedIndex);
 
                 lastSelectedIndex = selectedElement.Item2;
 
@@ -54,7 +56,7 @@ namespace RoundRobinSelection
             } while (counter < applianceNames.Length);
         }
 
-        static void DoCollectionByRoundRobinReferenceType()
+        static void DoObjectCollectionSelectByRoundRobin()
         {
             int counter = 0;
             int? lastSelectedIndex = null;
@@ -63,11 +65,29 @@ namespace RoundRobinSelection
 
             do
             {
-                var selectedElement = people.RoundRobin(x => x.Age, lastSelectedIndex);
+                var selectedElement = people.SelectByRoundRobin(x => x.Age, lastSelectedIndex);
 
                 lastSelectedIndex = selectedElement.Item2;
 
                 Console.WriteLine($"{selectedElement.Item1.FirstName} {selectedElement.Item1.LastName} age {selectedElement.Item1.Age} | Last selected index is {lastSelectedIndex}");
+
+                counter++;
+            } while (counter < people.Count());
+        }
+
+        static void DoObjectCollectionSelectByRoundRobinNoIndex()
+        {
+            int counter = 0;
+
+            var people = Person.GetPeople().ToArray();
+
+            Person lastSelectedElement = null;
+
+            do
+            {
+                lastSelectedElement = people.SelectByRoundRobin(x => x.LastName, lastSelectedElement);
+
+                Console.WriteLine($"{lastSelectedElement.FirstName} {lastSelectedElement.LastName} age {lastSelectedElement.Age}");
 
                 counter++;
             } while (counter < people.Count());

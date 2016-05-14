@@ -6,7 +6,7 @@ namespace RoundRobinSelection.Extension
 {
     public static class CollectionExtension
     {
-        public static Tuple<T, int> RoundRobin<T, TResult>(this IEnumerable<T> collection, Func<T, TResult> orderByExpression, int? lastSelectedIndex)
+        public static Tuple<T, int> SelectByRoundRobin<T, TResult>(this IEnumerable<T> collection, Func<T, TResult> orderByExpression, int? lastSelectedIndex)
 
         {
             var orderedCollection = collection.OrderBy(orderByExpression);
@@ -17,6 +17,26 @@ namespace RoundRobinSelection.Extension
             }
 
             return Tuple.Create(orderedCollection.ElementAtOrDefault(lastSelectedIndex.Value + 1), lastSelectedIndex.Value + 1);
+        }
+
+        public static T SelectByRoundRobin<T, TResult>(this IEnumerable<T> collection, Func<T, TResult> orderByExpression, T lastSelectedValue)
+
+        {
+            var orderedCollection = collection.OrderBy(orderByExpression);
+
+            if (lastSelectedValue == null)
+            {
+                return orderedCollection.ElementAtOrDefault(0);
+            }
+
+            int lastSelectedIndex = orderedCollection.ToList().IndexOf(lastSelectedValue);
+
+            if (lastSelectedIndex == orderedCollection.Count() - 1)
+            {
+                return orderedCollection.ElementAtOrDefault(0);
+            }
+
+            return orderedCollection.ElementAtOrDefault(++lastSelectedIndex);
         }
     }
 }

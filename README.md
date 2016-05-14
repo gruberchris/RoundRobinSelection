@@ -1,2 +1,3 @@
-# RoundRobinSelection
-Collection round robin item selection
+# Round Robin Selection
+Collection extension to select elements by round robin.
+
