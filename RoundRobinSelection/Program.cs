@@ -40,7 +40,7 @@ namespace RoundRobinSelection
             string[] applianceNames = { "television", "microwave", "washer", "dryer", "refridgerator" };
 
             int counter = 0;
-            int lastSelectedIndex = -1;
+            int? lastSelectedIndex = null;
 
             do
             {
@@ -57,7 +57,7 @@ namespace RoundRobinSelection
         static void DoCollectionByRoundRobinReferenceType()
         {
             int counter = 0;
-            int lastSelectedIndex = -1;
+            int? lastSelectedIndex = null;
 
             var people = Person.GetPeople().ToArray();
 
