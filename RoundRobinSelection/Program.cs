@@ -11,11 +11,11 @@ namespace RoundRobinSelection
         {
             DoArrayHelperSelectByRoundRobin();
 
-            DoCollectionByRoundRobin();
+            DoArrayByRoundRobin();
 
-            DoObjectCollectionSelectByRoundRobin();
+            DoCollectionSelectByRoundRobin();
 
-            DoObjectCollectionSelectByRoundRobinNoIndex();
+            DoCollectionSelectByRoundRobinNoIndex();
         }
 
         static void DoArrayHelperSelectByRoundRobin()
@@ -37,7 +37,7 @@ namespace RoundRobinSelection
             } while (counter < colorNames.Length);
         }
 
-        static void DoCollectionByRoundRobin()
+        static void DoArrayByRoundRobin()
         {
             string[] applianceNames = { "television", "microwave", "washer", "dryer", "refridgerator" };
 
@@ -56,12 +56,12 @@ namespace RoundRobinSelection
             } while (counter < applianceNames.Length);
         }
 
-        static void DoObjectCollectionSelectByRoundRobin()
+        static void DoCollectionSelectByRoundRobin()
         {
             int counter = 0;
             int? lastSelectedIndex = null;
 
-            var people = Person.GetPeople().ToArray();
+            var people = Person.GetPeople().ToList();
 
             do
             {
@@ -75,35 +75,36 @@ namespace RoundRobinSelection
             } while (counter < people.Count());
         }
 
-        static void DoObjectCollectionSelectByRoundRobinNoIndex()
+        static void DoCollectionSelectByRoundRobinNoIndex()
         {
             int counter = 0;
 
-            var people = Person.GetPeople().ToArray();
+            var people = Person.GetPeople().ToList();
 
             Person lastSelectedElement = null;
 
             do
             {
-                lastSelectedElement = people.SelectByRoundRobin(x => x.LastName, lastSelectedElement);
+                lastSelectedElement = people.SelectByRoundRobinFromPriorElement(x => x.LastName, lastSelectedElement);
 
                 Console.WriteLine($"{lastSelectedElement.FirstName} {lastSelectedElement.LastName} age {lastSelectedElement.Age}");
 
                 counter++;
             } while (counter < people.Count());
         }
+    }
 
-        public class Person
+    public class Person
+    {
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public int Age { get; set; }
+
+        public static IEnumerable<Person> GetPeople()
         {
-            public string FirstName { get; set; }
-
-            public string LastName { get; set; }
-
-            public int Age { get; set; }
-
-            public static IEnumerable<Person> GetPeople()
-            {
-                List<Person> peopleList = new List<Person>
+            List<Person> peopleList = new List<Person>
                 {
                     new Person {Age = 28, FirstName = "John", LastName = "Smith"},
                     new Person {Age = 32, FirstName = "Pepper", LastName = "Poppy"},
@@ -111,8 +112,7 @@ namespace RoundRobinSelection
                 };
 
 
-                return peopleList;
-            } 
+            return peopleList;
         }
     }
 }

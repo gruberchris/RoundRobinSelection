@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("RoundRobinSelection")]
+[assembly: AssemblyTitle("RoundRobinSelection.Test")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("RoundRobinSelection")]
+[assembly: AssemblyProduct("RoundRobinSelection.Test")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b273d85c-40bb-412a-9187-c689c9a06f72")]
+[assembly: Guid("15f44b7f-00e6-4917-ae15-f7d780bc897c")]
 
 // Version information for an assembly consists of the following four values:
 //

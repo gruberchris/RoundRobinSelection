@@ -19,7 +19,7 @@ namespace RoundRobinSelection.Extension
             return Tuple.Create(orderedCollection.ElementAtOrDefault(lastSelectedIndex.Value + 1), lastSelectedIndex.Value + 1);
         }
 
-        public static T SelectByRoundRobin<T, TResult>(this IEnumerable<T> collection, Func<T, TResult> orderByExpression, T lastSelectedValue)
+        public static T SelectByRoundRobinFromPriorElement<T, TResult>(this IEnumerable<T> collection, Func<T, TResult> orderByExpression, T lastSelectedValue)
 
         {
             var orderedCollection = collection.OrderBy(orderByExpression);
